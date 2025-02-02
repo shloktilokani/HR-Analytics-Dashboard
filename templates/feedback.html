@@ -1,0 +1,63 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Feedback</title>
+    <!-- Font Awesome Link -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"/>
+    <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+<section>
+    <div class="container">
+        <h1 class="heading">Feedback</h1>
+        <input
+                type="hidden"
+                name="first_column_value"
+                value="{{ first_column_value }}"/>
+        <div class="emp-table-wrap">
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Feedback by</th>
+                    <th>Remarks</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for record in feedback_data %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <form
+                action="/feedback/{{ first_column_value }}"
+                method="post"
+                class="feedback-form">
+            <label for="feed">Add Feedback</label>
+            <div class="feedback-input">
+                <input type="text" id="feed" name="feed"/>
+                <input type="submit" id="addFeed" value="Add" class="btn-outline"/>
+            </div>
+        </form>
+        <div class="back-btn-wrap">
+            <a href="/emp_exit" class="back-btn"
+            ><i class="fa-solid fa-arrow-left"></i> Back</a
+            >
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>HR Management</title>
+		<!-- Font Awesome Link -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+			integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='style.css') }}" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+		<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+		<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-html2canvas/1.1.1/html2canvas.min.js"></script>
+		<script>
+			window.html2canvas = html2canvas;
+			window.jsPDF = window.jspdf.jsPDF; // Adjust for jsPDF version if needed
+
+			function printToPDF() {
+				const elements = document.querySelectorAll("#print");
+
+				const doc = new jsPDF({
+					orientation: "portrait",
+					format: "a3",
+				});
+
+				let promise = Promise.resolve();
+
+				elements.forEach((element, index) => {
+					promise = promise.then(() => {
+						if (index !== 0) {
+							doc.addPage("a3", "portrait");
+						}
+						return html2canvas(element).then((canvas) => {
+							const imgWidth = doc.internal.pageSize.getWidth() - 40; // 20px margin on each side
+							const imgHeight = (canvas.height * imgWidth) / canvas.width;
+							const scaleFactor = imgWidth / canvas.width;
+
+							const x = (doc.internal.pageSize.getWidth() - imgWidth) / 2;
+							const y = (doc.internal.pageSize.getHeight() - imgHeight) / 2;
+
+							doc.addImage(
+								canvas,
+								"PNG",
+								x,
+								y,
+								imgWidth,
+								imgHeight,
+								undefined,
+								"FAST",
+								0,
+								scaleFactor
+							);
+						});
+					});
+				});
+
+				var today = new Date();
+				var date = today.getDate();
+				var month = today.getMonth() + 1;
+				var year = today.getFullYear();
+				var formattedDate = date + "-" + month + "-" + year;
+				var dept = document.getElementById("department").value;
+				var filename = "Report_" + formattedDate + "_" + dept;
+				promise.then(() => {
+					doc.save(filename + ".pdf");
+				});
+			}
+		</script>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<script src="{{ url_for('static', filename='reports_ajax.js') }}"></script>
+		<style>
+			@media print {
+				.print-section {
+					display: none;
+				}
+
+				.print-section.print-visible {
+					display: block;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Navigation Bar -->
+		<div class="navbar">
+			<div class="container">
+				<div class="navbar-wrap">
+					<ul class="menu-list">
+						<li><a href="/graphs" class="">Graphs</a></li>
+						<li><a href="/emp_exit" class="">Employee Exit Data</a></li>
+						<li><a href="/reports" class="active">Reports</a></li>
+					</ul>
+					<div class="nav-right">
+						<div class="nav-btn">
+							<a href="/logout"><button class="btn-theme">Logout</button></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="emp-exit">
+			<div class="container">
+				<h1 class="heading">Reports</h1>
+				<form id="slicer-form" class="dropdown-list">
+					<div class="dropdown-item">
+						<label for="department">Select Department :</label>
+						<div class="select-wrap">
+							<i class="fa-solid fa-angle-down"></i>
+							<select id="department" name="department">
+								{% for department in departments %}
+								<option value="{{ department }}">{{ department }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="report-btn-wrap">
+						<button type="submit" class="btn-theme">Update</button>
+						<button onclick="printToPDF()" class="btn-outline">
+							<i class="fa-solid fa-print"></i> Print this page
+						</button>
+					</div>
+				</form>
+			</div>
+		</section>
+
+		<section class="report">
+			<div class="container">
+				<div id="print-content" class="report-wrap">
+					<a id="print">
+						<h1 class="graph-heading">Employee Exit Interview Report</h1>
+
+						<div class="department-wrap">
+							<h2 id="dept"></h2>
+							<h3 id="dateDay"></h3>
+						</div>
+
+						<div class="report-list">
+							<div class="report-item">
+								<h3>Exits</h3>
+								<div class="report-detail-wrap">
+									<div class="exit-wrap">
+										<span id="exits"></span>
+										<h4>Exits</h4>
+									</div>
+									<div class="exit-wrap">
+										<span id="avgYOS"></span>
+										<h4>Average Years of Service</h4>
+									</div>
+								</div>
+								<div id="DistributionYOSGraph" class="report-graph"></div>
+							</div>
+
+							<div class="report-item">
+								<h3>Overall Satisfaction</h3>
+								<div class="report-detail-wrap">
+									<div class="exit-wrap">
+										<span id="overallSatisfactionKPI"></span>
+										<h4>Overall Satisfaction Rate</h4>
+									</div>
+									<div class="exit-wrap">
+										<span id="overallSatisfactionAvg"></span>
+										<h4>Average Overall Satisfaction</h4>
+									</div>
+								</div>
+								<div id="overallSatisfactionGraph" class="report-graph"></div>
+							</div>
+
+							<div class="report-item">
+								<h3>Management Satisfaction</h3>
+								<div class="report-detail-wrap">
+									<div class="exit-wrap">
+										<span id="mngmtSatisfactionKPI"></span>
+										<h4>Management Satisfaction Rate</h4>
+									</div>
+									<div class="exit-wrap">
+										<span id="mngmtSatisfactionAvg"></span>
+										<h4>Average Management Satisfaction</h4>
+									</div>
+								</div>
+								<div id="mngmtSatisfactionGraph" class="report-graph"></div>
+							</div>
+
+							<div class="report-item">
+								<h3>Salary Satisfaction</h3>
+								<div class="report-detail-wrap">
+									<div class="exit-wrap">
+										<span id="salarySatisfactionKPI"></span>
+										<h4>Salary Satisfaction Rate</h4>
+									</div>
+									<div class="exit-wrap">
+										<span id="salarySatisfactionAvg"></span>
+										<h4>Average Salary Satisfaction</h4>
+									</div>
+								</div>
+								<div id="salarySatisfactionGraph" class="report-graph"></div>
+							</div>
+						</div>
+					</a>
+					<div class="report-list" id="print">
+						<div class="report-item">
+							<h3>Primary Reasons</h3>
+							<div id="primaryReasonGraph" class="report-graph"></div>
+						</div>
+
+						<div class="report-item">
+							<h3>Growth Opportunities</h3>
+							<div id="growthOppurGraph" class="report-graph"></div>
+						</div>
+
+						<div class="report-item">
+							<h3>Work Environment Rating</h3>
+							<div class="report-detail-wrap">
+								<div class="exit-wrap">
+									<span id="workEnvKPI"></span>
+									<h4>Work Env Rate</h4>
+								</div>
+								<div class="exit-wrap">
+									<span id="workEnvAvg"></span>
+									<h4>Average Work Env</h4>
+								</div>
+							</div>
+							<div id="workEnvGraph" class="report-graph"></div>
+						</div>
+
+						<div class="report-item">
+							<h3>Correlation</h3>
+							<div id="correlationSatisfactionGraph" class="report-graph"></div>
+						</div>
+
+						<div class="report-item">
+							<h3>Company Recommendation</h3>
+							<div class="report-detail-wrap">
+								<div class="exit-wrap">
+									<span id="companyRecommendKPI"></span>
+									<h4>Company Recommendation Rate</h4>
+								</div>
+							</div>
+							<div id="companyRecommendGraph" class="report-graph"></div>
+						</div>
+						<div class="report-item">
+							<h3>Company Recommendation</h3>
+							<h4>(Contribution of Factors)</h4>
+							<div id="factorCompanyRecommendTable" class="company-table"></div>
+						</div>
+					</div>
+
+					<div class="report-list" id="print">
+						<div class="report-item prediction-item">
+							<h3>Predictions</h3>
+							<div class="prediction-wrap">
+								<h4>
+									Ratings of 'Work Env' & 'Growth Opportunity' for which
+									'Overall Satisfaction' would be high?
+								</h4>
+								<h4>
+									Ratings of 'Overall Satisfaction' and 'Management
+									Satisfaction' forwhich Employee would Recommend the Company
+								</h4>
+								<div id="predict1Table" class="predict-table"></div>
+								<div id="predict2Table" class="predict-table"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

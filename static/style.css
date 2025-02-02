@@ -1,0 +1,446 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+	color: #333333;
+}
+
+.container {
+	max-width: 1240px;
+	margin: 0 auto;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.btn-theme {
+	font-size: 16px;
+	font-weight: 700;
+	background-color: #1cb666;
+	color: #fff;
+	padding: 8px 24px;
+	border: 0;
+	border-radius: 4px;
+	transition: all 0.3s;
+	cursor: pointer;
+}
+.btn-theme:hover {
+	background-color: #1b9154;
+}
+/* For Navbar Start */
+.navbar {
+	padding: 10px 0 10px 0;
+	border-bottom: 1px solid #e9ebea;
+}
+.menu-list {
+	display: flex;
+	gap: 24px;
+}
+.menu-list li a {
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333333;
+	padding: 5px 8px 5px 8px;
+	display: block;
+	transition: all 0.3s;
+	position: relative;
+}
+.menu-list li a.active::after {
+	background-color: #1cb666;
+}
+.menu-list li a::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	background-color: transparent;
+	left: 0;
+	bottom: -17px;
+	border-radius: 3px;
+}
+.navbar-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.nav-btn button {
+	padding: 12px 24px;
+	font-size: 17px;
+}
+/* For Navbar End */
+
+/* For Emp Exit Page Start */
+.heading {
+	font-size: 36px;
+	font-weight: 700;
+	margin: 40px 0 20px 0;
+}
+.dropdown-list {
+	display: flex;
+	gap: 16px 32px;
+	flex-wrap: wrap;
+}
+.dropdown-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.dropdown-item label {
+	font-size: 16px;
+	font-weight: 500;
+}
+.dropdown-item select {
+	border: 1px solid #e1e8f0;
+	color: #666666;
+	border-radius: 6px;
+	padding: 12px 34px 12px 14px;
+	position: relative;
+	font-size: 16px;
+	-moz-appearance: none; /* Remove default appearance */
+	-webkit-appearance: none;
+	appearance: none;
+	outline: 0;
+}
+.select-wrap {
+	position: relative;
+}
+.select-wrap i {
+	position: absolute;
+	right: 14px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 9;
+	color: #666666;
+	font-size: 14px;
+}
+.update-btn {
+	padding: 8px 28px;
+	border: 0;
+}
+.emp-table-wrap {
+	margin-top: 40px;
+	width: 100%;
+	overflow-x: auto;
+	padding-bottom: 10px;
+	overflow-y: scroll;
+	max-height: 100vh;
+}
+.emp-table-wrap table {
+	border: 1px solid #e0e3e1;
+	table-layout: fixed;
+	width: 100%;
+}
+.emp-table-wrap table thead tr th {
+	padding: 8px 10px;
+	border-bottom: 1px solid #e0e3e1;
+	position: sticky;
+	top: 0;
+	background-color: white;
+	font-size: small;
+}
+.emp-table-wrap table tbody tr td {
+	font-size: 15px;
+	padding: 14px 10px;
+	text-align: center;
+}
+.emp-table-wrap table tbody tr:not(:last-child) td {
+	border-bottom: 1px solid #e0e3e1;
+}
+.emp-table-wrap table tbody tr td a {
+	color: #1cb666;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 14px;
+	background-color: #e0ffef;
+	padding: 6px 8px;
+}
+/* For Emp Exit Page End */
+
+/* For Login Page Start */
+.login-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login-page .form-wrap {
+	width: 32%;
+	padding: 30px;
+	margin-top: 80px;
+	box-shadow: 2px 2px 14px 2px #0000000f;
+	border-radius: 10px;
+	border: 1px solid #e9ebea;
+}
+.login-page .form-wrap h1 {
+	text-align: center;
+	margin: 0 0 50px 0;
+}
+.login-page .form-wrap .form-input-group:not(:last-child) {
+	margin-bottom: 20px;
+}
+.login-page .form-wrap .form-input-group label {
+	font-size: 15px;
+	font-weight: 600;
+	margin-bottom: 8px;
+	display: block;
+}
+.login-page .form-wrap .form-input-group input {
+	width: 92%;
+	padding: 14px 16px;
+	border: 1px solid #e9ebea;
+	border-radius: 4px;
+	font-size: 15px;
+	color: #999999;
+	display: block;
+	outline: none;
+	transition: all 0.3s;
+}
+.login-page .form-wrap .form-input-group input:focus {
+	border-color: #1cb666;
+}
+.login-page .form-wrap button {
+	width: 100%;
+	margin-top: 20px;
+	padding: 14px 24px;
+	font-weight: 600;
+}
+/* For Login Page End */
+
+/* For Feedback Page Start */
+.feedback-form {
+	margin-top: 40px;
+}
+.feedback-form label {
+	font-size: 18px;
+	margin-bottom: 10px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	display: inline-block;
+}
+.feedback-form .feedback-input {
+	display: flex;
+	gap: 12px;
+}
+.feedback-form .feedback-input input[type="text"] {
+	padding: 12px 16px;
+	border: 1px solid #e1e4e2;
+	border-radius: 4px;
+	font-size: 15px;
+	color: #999999;
+	width: 25%;
+	outline: 0;
+}
+.btn-outline {
+	border: 2px solid #1cb666;
+	color: #1cb666;
+	border-radius: 4px;
+	background-color: #fff;
+	padding: 5px 24px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+.btn-outline:hover {
+	background-color: #1cb666;
+	color: #fff;
+}
+.back-btn-wrap {
+	margin-top: 24px;
+}
+.back-btn-wrap .back-btn {
+	text-decoration: none;
+	color: #1cb666;
+	font-weight: 500;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.back-btn-wrap .back-btn i {
+	font-size: 15px;
+}
+/* For Feedback Page End */
+
+/* For Graph Page Start */
+.graph-list {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 50px 50px;
+	margin-top: 50px;
+}
+.graph-list .graph-item img {
+	width: 100%;
+}
+/* For Graph Page End */
+
+/* For Report Page Start */
+.report {
+	padding: 0 0 60px 0;
+}
+.report-btn-wrap {
+	display: flex;
+	gap: 10px;
+}
+.report-btn-wrap .btn-outline i {
+	margin-right: 4px;
+}
+.graph-heading {
+	font-size: 34px;
+	font-weight: 600;
+	text-align: center;
+	margin: 60px 0 40px 0;
+	position: relative;
+}
+.graph-heading::after {
+	content: "";
+	position: absolute;
+	width: 28%;
+	height: 5px;
+	background-color: #1cb666;
+	border-radius: 3px;
+	bottom: -6px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.department-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	border-bottom: 1px solid #c5c5c5;
+	padding-bottom: 24px;
+}
+.department-wrap h2 {
+	font-size: 25px;
+	font-weight: 600;
+	text-align: center;
+	margin-top: 40px;
+	margin: 0;
+}
+.department-wrap h3 {
+	font-size: 25px;
+	font-weight: 600;
+	text-align: center;
+	margin-top: 40px;
+	margin: 0;
+}
+.report-list {
+	display: flex;
+	gap: 60px 0px;
+	margin-top: 50px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.report-item {
+	width: 45%;
+}
+.report-item h3 {
+	text-align: center;
+	font-size: 24px;
+	font-weight: 600;
+	margin: 0 0 20px 0;
+}
+.report-item h4 {
+	text-align: center;
+	/* font-size: 24px;
+	font-weight: 600;
+	margin: 0 0 20px 0; */
+}
+.report-detail-wrap {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+.report-detail-wrap .exit-wrap {
+	border: 1px solid #000;
+	border-radius: 8px;
+	padding: 15px 10px;
+	text-align: center;
+	width: 24%;
+}
+.report-detail-wrap .exit-wrap span {
+	font-size: 40px;
+}
+.report-detail-wrap .exit-wrap h4 {
+	margin: 0 0 0 0;
+	font-size: 13px;
+}
+.report-graph img {
+	width: 100%;
+}
+.company-table {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+.company-table table {
+	border: 1px solid #000000;
+	width: 100%;
+}
+.company-table table tr td {
+	padding: 8px 20px 8px 20px;
+	font-size: 16px;
+	text-align: center;
+}
+.company-table table tr td:first-child {
+	font-weight: 600;
+}
+.company-table table tr td:not(:last-child) {
+	border-right: 1px solid #e0e3e1;
+}
+.company-table table tr:not(:last-child) td {
+	border-bottom: 1px solid #e0e3e1;
+}
+/* For Predict Table */
+.predict-table table {
+	border: 1px solid #000000;
+	width: 100%;
+}
+.predict-table table thead tr th {
+	padding: 12px 20px 12px 20px;
+	border-bottom: 1px solid #e0e3e1;
+	text-align: center;
+}
+.predict-table table thead tr th:not(:last-child) {
+	border-right: 1px solid #e0e3e1;
+}
+.predict-table table tr td:not(:last-child) {
+	border-right: 1px solid #e0e3e1;
+}
+.predict-table table tr:not(:last-child) td {
+	border-bottom: 1px solid #e0e3e1;
+}
+.predict-table table tr td {
+	padding: 12px 20px 12px 20px;
+	font-size: 17px;
+	text-align: center;
+}
+.prediction-wrap {
+	margin-top: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+.prediction-wrap > * {
+	flex-basis: calc(50% - 10px); /* Adjust the width according to your gap */
+	margin: 0;
+}
+.prediction-wrap h4 {
+	text-align: left;
+}
+.prediction-item {
+	width: 100%;
+}
+.prediction-item h3 {
+	font-size: 28px;
+}
+
+/* For Report Page End */
