@@ -1,6 +1,5 @@
 # HR Analytics Dashboard 🚀📊
 
-## 🎥 Demo Video  
 ![HR Analytics Dashboard Demo](https://github.com/shloktilokani/HR-Analytics-Dashboard/blob/main/Res/HR%20Analytics%20Dashboard%20Demo.gif)
 
 The **HR Analytics Dashboard** is a sophisticated web application developed using:
