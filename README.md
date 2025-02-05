@@ -1,5 +1,8 @@
 # HR Analytics Dashboard 🚀📊
 
+## 🎥 Demo Video  
+![HR Analytics Dashboard Demo](https://github.com/shloktilokani/HR-Analytics-Dashboard/blob/main/Res/HR%20Analytics%20Dashboard%20Demo.gif)
+
 The **HR Analytics Dashboard** is a sophisticated web application developed using:
 
 - 🐍 **Python**: Powers backend functionality, performs data analysis, and manages database interactions.
@@ -18,7 +21,8 @@ At its core, the dashboard aggregates and analyzes data collected through exit i
 - 🤝 Provides insights to **enhance employee retention**
 
 ## 🎯 Technologies Used
-- **MySQL** 🗄️: Used as the primary relational database management system for storing and managing HR data.- **Python** 🐍: Used for backend development, data processing, and analytics. Leverages libraries such as Pandas for data manipulation and Flask for web functionality.
+- **MySQL** 🗄️: Used as the primary relational database management system for storing and managing HR data.
+- **Python** 🐍: Used for backend development, data processing, and analytics. Leverages libraries such as Pandas for data manipulation and Flask for web functionality.
 - **HTML & CSS** 🎨: Ensures a visually appealing and structured frontend layout.
 - **JavaScript** ⚡: Enhances interactivity and dynamic content rendering.
 - **MySQL & SQL/Database Management** 🗄️: Stores and organizes employee data for efficient retrieval and analysis.
